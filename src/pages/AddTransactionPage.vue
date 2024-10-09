@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+
 </script>
 
 <template>
@@ -22,7 +23,6 @@
     <section class="add-transaction-form">
       <div class="numbers-form"></div>
     </section>
-    <nav class="bottom-nav"></nav>
   </div>
   
 </template>

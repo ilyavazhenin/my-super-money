@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import NavBar from './components/NavBar.vue';
 </script>
 
 <template>
   <main class="main">
     <RouterView />
     <nav>
-      <RouterLink to="/">Add Transaction</RouterLink>
+      <!-- <RouterLink to="/">Add Transaction</RouterLink>
       <RouterLink to="/overview">Overview</RouterLink>
-      <RouterLink to="/settings">Settings</RouterLink>
+      <RouterLink to="/settings">Settings</RouterLink> -->
     </nav>
+    <NavBar />
   </main>
 
 </template>
@@ -50,5 +51,4 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-
 </style>
