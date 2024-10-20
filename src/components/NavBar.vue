@@ -10,7 +10,7 @@ const items = ref([
 </script>
 
 <template>
-  <Menubar :model="items">
+  <Menubar :model="items" breakpoint="1px">
     <template #item="{ item, props }">
       <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
         <a :href="href" v-bind="props.action" @click="navigate">
@@ -21,3 +21,13 @@ const items = ref([
     </template>
   </Menubar>
 </template>
+
+<style scoped>
+  .p-menubar {
+    justify-content: center;
+  }
+
+  .p-menubar-root-list {
+    gap: 0px;
+  }
+</style>
