@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import LastTransactionTable from '../components/LastTransactionTable.vue'
+import AddTransactionForm from '@/components/AddTransactionForm.vue';
 </script>
 
 <template>
@@ -34,7 +35,9 @@ import LastTransactionTable from '../components/LastTransactionTable.vue'
     </section>
 
     <section class="add-transaction-form">
-      <div class="numbers-form"></div>
+      <div class="main-transaction-data">
+        <AddTransactionForm />
+      </div>
     </section>
   </div>
 </template>
@@ -43,6 +46,7 @@ import LastTransactionTable from '../components/LastTransactionTable.vue'
 .general {
   margin-bottom: 20px;
 }
+
 .balance-row {
   display: flex;
   justify-content: space-between;

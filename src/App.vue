@@ -7,11 +7,11 @@ import NavBar from './components/NavBar.vue';
 <template>
   <main class="main">
     <RouterView />
-    <nav>
+    <!-- <nav> -->
       <!-- <RouterLink to="/">Add Transaction</RouterLink>
       <RouterLink to="/overview">Overview</RouterLink>
       <RouterLink to="/settings">Settings</RouterLink> -->
-    </nav>
+    <!-- </nav> -->
     <NavBar />
   </main>
 
