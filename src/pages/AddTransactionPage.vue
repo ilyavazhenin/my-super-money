@@ -5,6 +5,7 @@ import AddTransactionForm from '@/components/AddTransactionForm.vue';
 
 <template>
   <div class="main">
+
     <section class="general">
       <h1>Balance</h1>
       <div class="balance-row">
@@ -29,6 +30,7 @@ import AddTransactionForm from '@/components/AddTransactionForm.vue';
         </div>
       </div>
     </section>
+
     <section class="last-transactions">
       <h2>Last Transactions This Month</h2>
       <LastTransactionTable size="small"/>
@@ -39,6 +41,7 @@ import AddTransactionForm from '@/components/AddTransactionForm.vue';
         <AddTransactionForm />
       </div>
     </section>
+    
   </div>
 </template>
 
@@ -84,5 +87,10 @@ import AddTransactionForm from '@/components/AddTransactionForm.vue';
   grid-area: outcome-this-month;
   display: flex;
   justify-content: space-between;
+}
+
+.main-transaction-data {
+  display: flex;
+  gap: 10px
 }
 </style>

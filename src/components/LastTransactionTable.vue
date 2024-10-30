@@ -48,8 +48,9 @@ const transactions = ref([
     <Column field="date" header="Date"></Column>
     <Column field="icon" header="Icon">
       <template #body="slotProps">
-        <i :class="slotProps.data.icon"></i> </template
-    ></Column>
+        <i :class="slotProps.data.icon"></i>
+      </template>
+    </Column>
     <Column field="category" header="Category"></Column>
     <Column field="amount" header="Amount"></Column>
   </DataTable>
