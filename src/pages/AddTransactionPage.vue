@@ -91,6 +91,8 @@ import AddTransactionForm from '@/components/AddTransactionForm.vue';
 
 .main-transaction-data {
   display: flex;
-  gap: 10px
+  gap: 10px;
+  justify-content: space-between;
 }
+
 </style>
