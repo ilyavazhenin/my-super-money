@@ -4,6 +4,7 @@
     import DatePicker from 'primevue/datepicker';
     import InputText from 'primevue/inputtext';
     import Listbox from 'primevue/listbox';
+    import Button from 'primevue/button';
     import { ref } from 'vue';
 
 
@@ -27,42 +28,58 @@
 </script>
 
 <template>
-    <div class="fields-container">
-        <FloatLabel variant="in">
-        <InputNumber v-model="amount" mode="currency" currency="RUB" inputId="money_amount" locale="ru-RU" />
-        <label for="money_amount" class="font-bold block mb-2">Amount</label>
-        </FloatLabel>
+    <div class="inputs-container">
+        <div class="fields-container">
+            <FloatLabel variant="in">
+                <InputNumber v-model="amount" mode="currency" currency="RUB" inputId="money_amount" locale="ru-RU" inputmode="numeric" fluid="false"/>
+                <label for="money_amount">Amount</label>
+            </FloatLabel>
 
-        <FloatLabel variant="in">
-        <InputText id="transactionName" v-model="transactionName" />
-        <label for="transactionName">Transaction name</label>
-        </FloatLabel>
+            <FloatLabel variant="in">
+                <InputText id="transactionName" v-model="transactionName" class="transaction-input"/>
+                <label for="transactionName">Transaction name</label>
+            </FloatLabel>
 
-        <DatePicker class="date-picker-input" v-model="date" dateFormat="dd.mm.yy" />
-    </div>
+            <DatePicker class="date-picker-input" v-model="date" dateFormat="dd.mm.yy"/>
+        </div>
 
-    <div class="categories-picker-container">
-            <Listbox v-model="selectedCategory" :options="categories" optionLabel="name" class="categories-picker"
-            listStyle="max-height:200px">
-            <template #option="slotProps">
-                <div class="category-item">
-                <i :alt="slotProps.option.name" :class="slotProps.option.icon" style="width: 18px" />
-                <div>{{ slotProps.option.name }}</div>
-                </div>
-            </template>
+        <div class="categories-picker-container">
+            <Listbox v-model="selectedCategory" :options="categories" optionLabel="name" class="categories-picker" listStyle="max-height:200px">
+                <template #option="slotProps">
+                    <div class="category-item">
+                        <i :alt="slotProps.option.name" :class="slotProps.option.icon" style="width: 18px" />
+                        <div>{{ slotProps.option.name }}</div>
+                    </div>
+                </template>
             </Listbox>
+        </div>
+    </div>
+    
+
+    <div class="add-button-container">
+        <Button label="Submit" />
     </div>
 
 </template>
 
 <style scoped>
+    .add-button-container {
+        text-align: right;
+        margin-bottom: 5px;
+    }
+
+    .inputs-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
     .fields-container {
         display: flex;
         flex-direction: column;
+        width: 170px;
     }
 
     .date-picker-input {
-        width: 201px;
         height: 50px;
     }
 
@@ -79,5 +96,9 @@
         display: flex;
         align-items: center;
         column-gap: 10px;
+    }
+
+    .transaction-input {
+        width: 100%;
     }
 </style>
