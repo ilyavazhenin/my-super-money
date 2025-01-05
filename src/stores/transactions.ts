@@ -1,11 +1,11 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
 
 export interface ICategory {
     name: string;
     id: number;
     icon: string;
-};
+}
 
 export interface ITransaction {
     id: number | null;
@@ -16,7 +16,7 @@ export interface ITransaction {
     type: 'expense' | 'income';
 }
 
-const defaultCategory = { name: 'Food', id: 1, icon: 'pi pi-apple'};
+const defaultCategory = { name: 'Food', id: 1, icon: 'pi pi-apple' };
 
 const unfilledTransaction: ITransaction = {
     id: 0,
@@ -24,7 +24,7 @@ const unfilledTransaction: ITransaction = {
     name: null,
     date: new Date(),
     category: defaultCategory,
-    type: 'expense'
+    type: 'expense',
 };
 
 export const useTransactionsStore = defineStore('transactions', () => {
@@ -42,7 +42,7 @@ export const useTransactionsStore = defineStore('transactions', () => {
         { id: 9, name: 'Pets', icon: 'pi pi-discord' },
         { id: 10, name: 'Groceries', icon: 'pi pi-shopping-cart' },
     ]);
-    
+
     const allTransactions = ref<ITransaction[]>([]);
 
     function clearForm() {
@@ -53,10 +53,16 @@ export const useTransactionsStore = defineStore('transactions', () => {
         transaction.value.category = defaultCategory;
         transaction.value.type = 'expense';
     }
-  
-    function addTransaction() { 
-        allTransactions.value.unshift(transaction.value)
+
+    function addTransaction() {
+        allTransactions.value.unshift(transaction.value);
     }
 
-    return { transaction, allTransactions, categoryList, addTransaction, clearForm };
-})
+    return {
+        transaction,
+        allTransactions,
+        categoryList,
+        addTransaction,
+        clearForm,
+    };
+});

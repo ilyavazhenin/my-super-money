@@ -1,11 +1,10 @@
 <script setup lang="ts">
-    import LastTransactionTable from '../components/LastTransactionTable.vue'
-    import AddTransactionForm from '@/components/AddTransactionForm.vue';
+import LastTransactionTable from '../components/LastTransactionTable.vue';
+import AddTransactionForm from '@/components/AddTransactionForm.vue';
 </script>
 
 <template>
     <div class="main">
-
         <section class="general">
             <h1>Balance</h1>
             <div class="balance-row">
@@ -34,7 +33,7 @@
 
         <section class="last-transactions">
             <h2>Last Transactions This Month</h2>
-            <LastTransactionTable size="small"/>
+            <LastTransactionTable size="small" />
         </section>
 
         <section class="add-transaction-form">
@@ -42,63 +41,61 @@
                 <AddTransactionForm />
             </div>
         </section>
-        
     </div>
 </template>
 
 <style scoped>
-    .general {
-        margin-bottom: 20px;
+.general {
+    margin-bottom: 20px;
+}
+
+.balance-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.monthly-data {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 10px;
+    grid-template-areas:
+        'month-name total-this-month'
+        'income-this-month outcome-this-month';
+
+    @media screen and (max-width: 500px) {
+        grid-template-columns: 1fr 1fr;
     }
+}
 
-    .balance-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
+.month-name {
+    grid-area: month-name;
+}
 
-    .monthly-data {
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 0px 10px;
-        grid-template-areas:
-            'month-name total-this-month'
-            'income-this-month outcome-this-month';
+.income-this-month {
+    grid-area: income-this-month;
+    display: flex;
+    justify-content: start;
+    column-gap: 10px;
+}
 
-        @media screen and (max-width: 500px) {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
+.total-this-month {
+    grid-area: total-this-month;
+    display: flex;
+    justify-content: space-between;
+}
 
-    .month-name {
-        grid-area: month-name;
-    }
+.outcome-this-month {
+    grid-area: outcome-this-month;
+    display: flex;
+    justify-content: space-between;
+}
 
-    .income-this-month {
-        grid-area: income-this-month;
-        display: flex;
-        justify-content: start;
-        column-gap: 10px;
-    }
-
-    .total-this-month {
-        grid-area: total-this-month;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .outcome-this-month {
-        grid-area: outcome-this-month;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .main-transaction-data {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        justify-content: space-between;
-    }
-
+.main-transaction-data {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+}
 </style>
