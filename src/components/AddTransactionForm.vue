@@ -7,27 +7,34 @@ import Listbox from 'primevue/listbox';
 import Button from 'primevue/button';
 import { ref } from 'vue';
 
-import { useTransactionsStore } from '@/stores/transactions';
+import { useTransactionsStore } from '@/stores/allTransactions';
+import type { ITransactionFormValue } from '@/types/transactions';
+import { useCategoriesStore } from '@/stores/categories';
 
-const { transaction, categoryList, clearForm } = useTransactionsStore();
+const defaultCategory = { name: 'Food', id: 1, icon: 'pi pi-apple' };
 
-// const amount = ref(null);
-// const transactionName = ref(null);
-// const date = ref(new Date());
+const unfilledTransaction: ITransactionFormValue = {
+    id: null,
+    amount: null,
+    name: null,
+    date: new Date(),
+    category: defaultCategory,
+    type: 'expense',
+};
 
-// const categories = ref([
-//     { name: 'Food', icon: 'pi pi-apple' },
-//     { name: 'Transport', icon: 'pi pi-car' },
-//     { name: 'Entertainment', icon: 'pi pi-ticket' },
-//     { name: 'Other', icon: 'pi pi-globe' },
-//     { name: 'Home', icon: 'pi pi-home' },
-//     { name: 'Health', icon: 'pi pi-heart' },
-//     { name: 'Education', icon: 'pi pi-bookmark' },
-//     { name: 'Clothes', icon: 'pi pi-tags' },
-//     { name: 'Pets', icon: 'pi pi-discord' },
-//     { name: 'Groceries', icon: 'pi pi-shopping-cart' },
-// ]);
-const selectedCategory = ref(categoryList[0]);
+const transactionFormValue = ref<ITransactionFormValue>(unfilledTransaction);
+
+const clearForm = () => {
+    transactionFormValue.value.id = 0;
+    transactionFormValue.value.amount = null;
+    transactionFormValue.value.name = null;
+    transactionFormValue.value.date = new Date();
+    transactionFormValue.value.category = defaultCategory;
+    transactionFormValue.value.type = 'expense';
+};
+
+const { addTransaction } = useTransactionsStore();
+const { categoryList } = useCategoriesStore();
 
 const scrollDownOnAmountClick = () => {
     setTimeout(() => {
@@ -39,10 +46,8 @@ const scrollDownOnAmountClick = () => {
 };
 
 const handleSubmit = () => {
-    console.log(transaction.date, transaction.category, transaction.amount, transaction.name);
-    console.log('Submitted');
+    addTransaction(transactionFormValue.value);
     clearForm();
-    console.log(transaction.date, transaction.category, transaction.amount, transaction.name);
 };
 </script>
 
@@ -52,7 +57,7 @@ const handleSubmit = () => {
             <div class="fields-container">
                 <FloatLabel variant="in">
                     <InputNumber
-                        v-model="transaction.amount"
+                        v-model="transactionFormValue.amount"
                         mode="currency"
                         currency="RUB"
                         input-id="money_amount"
@@ -67,14 +72,14 @@ const handleSubmit = () => {
                 <FloatLabel variant="in">
                     <InputText
                         id="transactionName"
-                        v-model="transaction.name"
+                        v-model="transactionFormValue.name"
                         class="transaction-input"
                     />
                     <label for="transactionName">Transaction name</label>
                 </FloatLabel>
 
                 <DatePicker
-                    v-model="transaction.date"
+                    v-model="transactionFormValue.date"
                     class="date-picker-input"
                     date-format="dd.mm.yy"
                 />
@@ -82,7 +87,7 @@ const handleSubmit = () => {
 
             <div class="categories-picker-container">
                 <Listbox
-                    v-model="transaction.category"
+                    v-model="transactionFormValue.category"
                     :options="categoryList"
                     default-value="categoryList[0]"
                     option-label="name"

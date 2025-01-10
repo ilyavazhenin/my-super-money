@@ -2,51 +2,16 @@
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import ScrollPanel from 'primevue/scrollpanel';
-import { ref } from 'vue';
+import { useTransactionsStore } from '@/stores/allTransactions';
+import { formatMoneySum } from '@/utils/transactions';
 
-const transactions = ref([
-    {
-        name: 'Transaction 1',
-        date: '2020-01-01',
-        icon: 'pi pi-shopping-cart',
-        category: 'Food',
-        amount: 100,
-    },
-    {
-        name: 'Transaction 1',
-        date: '2020-01-01',
-        icon: 'pi pi-shopping-cart',
-        category: 'Food',
-        amount: 100,
-    },
-    {
-        name: 'Transaction 1',
-        date: '2020-01-01',
-        icon: 'pi pi-apple',
-        category: 'Food',
-        amount: 100,
-    },
-    {
-        name: 'Transaction 1',
-        date: '2020-01-01',
-        icon: 'pi pi-shopping-cart',
-        category: 'Food',
-        amount: 100,
-    },
-    {
-        name: 'Transaction 1',
-        date: '2020-01-01',
-        icon: 'pi pi-shopping-cart',
-        category: 'Food',
-        amount: 100,
-    },
-]);
+const { allTransactions } = useTransactionsStore();
 </script>
 
 <template>
     <ScrollPanel style="width: 100%; height: 120px" class="scrollable-container">
         <DataTable
-            :value="transactions"
+            :value="allTransactions"
             class="table"
             :size="'small'"
             :pt="{
@@ -58,13 +23,17 @@ const transactions = ref([
         >
             <Column field="name"></Column>
             <Column field="date"></Column>
-            <Column field="icon">
+            <Column field="category.icon">
                 <template #body="slotProps">
-                    <i :class="slotProps.data.icon"></i>
+                    <i :class="slotProps.data.category.icon"></i>
                 </template>
             </Column>
-            <Column field="category"></Column>
-            <Column field="amount"></Column>
+            <Column field="category.name"></Column>
+            <Column field="amount">
+                <template #body="slotProps">
+                    {{ formatMoneySum(slotProps.data.amount) }}
+                </template></Column
+            >
         </DataTable>
     </ScrollPanel>
 </template>
